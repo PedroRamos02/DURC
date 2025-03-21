@@ -7,12 +7,14 @@ export const Login = () => {
         <input 
           className={style.login_input}
           placeholder='Email'
+          type='mail'
           data-icon="email"
           > 
         </input>
         <input 
           className={style.login_input} 
           placeholder='Password'
+          type='password'
           data-icon="password"
           >
         </input>

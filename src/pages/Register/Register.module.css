@@ -1,4 +1,4 @@
-.login {
+.register {
     background-image: url('/src/assets/BG.svg');
     background-repeat: no-repeat;
     background-size: cover;
@@ -9,13 +9,48 @@
     justify-content: center;
 }
 
-.login_form {
+.register_form {
     display: flex;
     flex-direction: column;
-    height: 30vh;
+    height: 70vh;
+    justify-content: center;
 }
 
-.login_input {
+.profile_label {
+    cursor: pointer;
+    display: flex;
+    align-self: center;
+    margin-bottom: 20px;
+}
+
+.profile_picture {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border: none;
+}
+
+.profile-picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-picture span {
+    font-size: 32px;
+    color: #777;
+}
+
+.hidden_input {
+    display: none;
+}
+
+.register_input {
     color: #FFFFFF;
     width: 300px;
     height: 45px;
@@ -25,21 +60,21 @@
     background: transparent;
 }
 
-.login_input[data-icon="email"] {
+.register_input[data-icon="email"] {
     background-image: url('/src/assets/user.png'); 
     background-repeat: no-repeat;
     background-position: 10px center; 
     padding-left: 40px
 }
 
-.login_input[data-icon="password"] {
+.register_input[data-icon="password"] {
     background-image: url('/src/assets/lock.png'); 
     background-repeat: no-repeat;
     background-position: 10px center; 
     padding-left: 40px
 }
 
-.login_button {
+.register_button {
     color: #2148C0;
     background-color: #FFFFFF;
     border-radius: 4px;
@@ -53,15 +88,7 @@
     cursor: pointer;
 }
 
-.login_button:hover {
+.register_button:hover {
     box-shadow: 2px 6px 10px rgba(0, 0, 0, 0.1); 
     transform: scale(1.02); 
   }
-
-.login_form p {
-    text-align: center;
-}
-
-.login_form p a {
-    text-decoration: none;
-}
