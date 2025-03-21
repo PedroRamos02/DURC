@@ -10,7 +10,6 @@ export const Login = () => {
           data-icon="email"
           > 
         </input>
-        
         <input 
           className={style.login_input} 
           placeholder='Password'
