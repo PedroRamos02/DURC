@@ -39,10 +39,12 @@ export const Register = () => {
       const response = await fetch("https://hkm0v2okk3.execute-api.us-west-2.amazonaws.com/dev/users/createUser", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json", 
+          "Content-Type": "application/json",
         },
+        mode: "cors",
         body: JSON.stringify(userData),
       });
+      
 
       if (!response.ok) {
         throw new Error("Erro ao criar usuário");
