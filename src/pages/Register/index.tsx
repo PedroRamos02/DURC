@@ -1,17 +1,19 @@
 import { useState } from "react";
-import style from "./Register.module.css"
-
-/*const initialValues = {
-  username: "",
-  email: "",
-  password: "",
-  confirmPassword: "",
-};
-*/
+import style from "./Register.module.css";
 
 export const Register = () => {
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
 
   const [image, setImage] = useState<string | null>(null);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [event.target.name]: event.target.value });
+  };
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -21,9 +23,42 @@ export const Register = () => {
     }
   };
 
-  return(
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+
+    const userData = {
+      user: {
+        username: formData.username,
+        email: formData.email,
+        password: formData.password,
+        profile_picture: image,  
+      },
+    };
+
+    try {
+      const response = await fetch("https://hkm0v2okk3.execute-api.us-west-2.amazonaws.com/dev/users/createUser", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json", 
+        },
+        body: JSON.stringify(userData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Erro ao criar usuário");
+      }
+
+      const data = await response.json();
+      console.log(data);
+      alert("Cadastro realizado!");
+    } catch (erro) {
+      console.error(erro);
+    }
+  };
+
+  return (
     <div className={style.register}>
-      <form className={style.register_form}>
+      <form className={style.register_form} onSubmit={handleSubmit}>
         <a href="/"><img src="./src/assets/arrow.png" /></a>
         <label htmlFor="file-input" className={style.profile_label}>
           <div className={style.profile_picture}>
@@ -37,36 +72,40 @@ export const Register = () => {
           onChange={handleImageChange}
           className={style.hidden_input}
         />
-        <input 
+        <input
           className={style.register_input}
-          placeholder='Nome de usuario'
+          placeholder="Nome de usuário"
           type="text"
-          data-icon="email"
-          > 
-        </input>
-        <input 
+          name="username"
+          value={formData.username}
+          onChange={handleChange}
+        />
+        <input
           className={style.register_input}
-          placeholder='Email'
-          type="mail"
-          data-icon="email"
-          > 
-        </input>
-        <input 
-          className={style.register_input} 
-          placeholder='informe sua senha'
+          placeholder="Email"
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+        />
+        <input
+          className={style.register_input}
+          placeholder="Informe sua senha"
           type="password"
-          data-icon="password"
-          >
-        </input>
-        <input 
-          className={style.register_input} 
-          placeholder='Confirme sua senha'
+          name="password"
+          value={formData.password}
+          onChange={handleChange}
+        />
+        <input
+          className={style.register_input}
+          placeholder="Confirme sua senha"
           type="password"
-          data-icon="password"
-          >
-        </input>
-        <button className={style.register_button}>Criar conta</button>
+          name="confirmPassword"
+          value={formData.confirmPassword}
+          onChange={handleChange}
+        />
+        <button type="submit" className={style.register_button}>Criar conta</button>
       </form>
     </div>
-  )
-}
+  );
+};
