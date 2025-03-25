@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import style from "./Home.module.css";
 import { FaEye, FaEyeSlash } from "react-icons/fa"; 
-import { environment } from "../../Environment";
 
 const Home = () => {
   const [formData, setFormData] = useState({
@@ -25,7 +24,7 @@ const Home = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await fetch(`${environment.REACT_APP_API_URL}/api/dev/users/getUser/${username}`,
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/dev/users/getUser/${username}`,
           {
             method: "GET",
             headers: {

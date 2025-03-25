@@ -1,7 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import style from './Login.module.css'
 import { useState } from 'react';
-import { environment } from '../../Environment';
 
 export const Login = () => {
   const [formData, setFormData] = useState({
@@ -28,7 +27,7 @@ export const Login = () => {
     
 
     try {
-      const response = await fetch(`${environment.REACT_APP_API_URL}/api/dev/users/authUser`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/dev/users/authUser`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
