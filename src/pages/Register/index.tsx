@@ -1,5 +1,6 @@
 import { useState } from "react";
 import style from "./Register.module.css";
+import { useNavigate } from "react-router-dom";
 
 export const Register = () => {
   const [formData, setFormData] = useState({
@@ -10,6 +11,7 @@ export const Register = () => {
   });
 
   const [image, setImage] = useState<string | null>(null);
+  const navigate = useNavigate(); 
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
@@ -26,17 +28,22 @@ export const Register = () => {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
+    if (formData.password !== formData.confirmPassword) {
+      alert("Senhas devem ser iguais. Por favor, tente novamente.");
+      return;
+    }
+
     const userData = {
       user: {
         username: formData.username,
         email: formData.email,
         password: formData.password,
-        profile_picture: image,  
+        profile_picture: image,
       },
     };
 
     try {
-      const response = await fetch("https://hkm0v2okk3.execute-api.us-west-2.amazonaws.com/dev/users/createUser", {
+      const response = await fetch(`/api/dev/users/createUser`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -53,6 +60,7 @@ export const Register = () => {
       const data = await response.json();
       console.log(data);
       alert("Cadastro realizado!");
+      navigate("/")
     } catch (erro) {
       console.error(erro);
     }

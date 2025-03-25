@@ -8,7 +8,7 @@ const Home = () => {
     password: "",
   });
 
-  const id = "guilherme";
+  const username = localStorage.getItem("username") || "";
 
   const [image, setImage] = useState<string | null>(null);
 
@@ -23,7 +23,7 @@ const Home = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await fetch(`/api/dev/users/getUser/${id}`,
+        const response = await fetch(`/api/dev/users/getUser/${username}`,
           {
             method: "GET",
             headers: {
@@ -37,16 +37,17 @@ const Home = () => {
         }
 
         const data = await response.json();
+        console.log(username)
 
-        // Atualiza o estado com os valores corretos da API
         setFormData({
-          username: data.username || "",
-          email: data.email || "",
-          password: "", // Não preencher automaticamente por segurança
+          username: data.message.username || "",
+          email: data.message.email || "",
+          password: data.message.password, 
+          
         });
 
-        if (data.profile_picture) {
-          setImage(data.profile_picture);
+        if (data.message.profile_picture) {
+          setImage(data.message.profile_picture);
         }
       } catch (error) {
         console.error(error);
