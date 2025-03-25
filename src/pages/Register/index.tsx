@@ -1,6 +1,7 @@
 import { useState } from "react";
 import style from "./Register.module.css";
 import { useNavigate } from "react-router-dom";
+import { environment } from "../../Environment";
 
 export const Register = () => {
   const [formData, setFormData] = useState({
@@ -43,7 +44,7 @@ export const Register = () => {
     };
 
     try {
-      const response = await fetch(`/api/dev/users/createUser`, {
+      const response = await fetch(`${environment.REACT_APP_API_URL}/api/dev/users/createUser`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
