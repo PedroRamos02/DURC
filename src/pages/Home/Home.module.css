@@ -12,8 +12,8 @@
 
 .home_card {
     display: flex;
-    width: 50%;
-    justify-content: space-around;
+    width: 40%;
+    justify-content: space-between;
 }
 
 .home_form {
@@ -26,6 +26,7 @@
     display: flex;
     align-self: center;
     margin-bottom: 20px;
+    margin-left: 40px;
 }
 
 .profile_picture {
@@ -63,6 +64,7 @@
     border-radius: 4px;
     border: 1px solid #FFFFFF;
     background: transparent;
+    padding-left: 20px;
 }
 
 .register_input[data-icon="email"] {

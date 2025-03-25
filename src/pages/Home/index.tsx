@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import style from "./Home.module.css";
+import { FaEye, FaEyeSlash } from "react-icons/fa"; 
 
 const Home = () => {
   const [formData, setFormData] = useState({
@@ -9,7 +10,7 @@ const Home = () => {
   });
 
   const username = localStorage.getItem("username") || "";
-
+  const [showPassword, setShowPassword] = useState(false); 
   const [image, setImage] = useState<string | null>(null);
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -47,7 +48,8 @@ const Home = () => {
         });
 
         if (data.message.profile_picture) {
-          setImage(data.message.profile_picture);
+          console.log(data.message.public_profile_picture)
+          setImage(data.message.public_profile_picture);
         }
       } catch (error) {
         console.error(error);
@@ -96,13 +98,19 @@ const Home = () => {
           <input
             className={style.register_input}
             placeholder="Informe sua senha"
-            type="password"
+            type={showPassword ? "text" : "password"} 
             name="password"
             value={formData.password}
             onChange={(e) =>
               setFormData({ ...formData, password: e.target.value })
             }
           />
+          <span
+            className={style.toggle_password}
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            {showPassword ? <FaEyeSlash /> : <FaEye />}
+          </span>
         </div>
       </div>
       <button className={style.edit_button}>Salvar</button>
