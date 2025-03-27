@@ -24,7 +24,7 @@ const Home = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/dev/users/getUser/${username}`,
+        const response = await fetch(`https://hkm0v2okk3.execute-api.us-west-2.amazonaws.com/dev/users/getUser/${username}`,
           {
             method: "GET",
             headers: {

@@ -43,7 +43,7 @@ export const Register = () => {
     };
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/dev/users/createUser`, {
+      const response = await fetch(`https://hkm0v2okk3.execute-api.us-west-2.amazonaws.com/dev/users/createUser`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
