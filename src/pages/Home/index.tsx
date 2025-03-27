@@ -24,7 +24,7 @@ const Home = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/dev/users/getUser/${username}`,
+        const response = await fetch(`/api/dev/users/getUser/${username}`,
           {
             method: "GET",
             headers: {
