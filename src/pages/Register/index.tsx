@@ -10,7 +10,7 @@ export const Register = () => {
     confirmPassword: "",
   });
 
-  const [image, setImage] = useState<string | null>(null);
+  const [imageBase64, setImageBase64] = useState<string | null>(null);
   const navigate = useNavigate(); 
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,8 +20,18 @@ export const Register = () => {
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      setImage(imageUrl);
+      const reader = new FileReader();
+      reader.readAsDataURL(file); 
+
+      reader.onload = () => {
+        if (typeof reader.result === "string") {
+          setImageBase64(reader.result);
+        }
+      };
+
+      reader.onerror = () => {
+        console.error("Erro ao ler o arquivo.");
+      };
     }
   };
 
@@ -38,7 +48,7 @@ export const Register = () => {
         username: formData.username,
         email: formData.email,
         password: formData.password,
-        profile_picture: image,
+        profile_picture: imageBase64, 
       },
     };
 
@@ -51,7 +61,6 @@ export const Register = () => {
         mode: "cors",
         body: JSON.stringify(userData),
       });
-      
 
       if (!response.ok) {
         throw new Error("Erro ao criar usuário");
@@ -60,7 +69,7 @@ export const Register = () => {
       const data = await response.json();
       console.log(data);
       alert("Cadastro realizado!");
-      navigate("/")
+      navigate("/");
     } catch (erro) {
       console.error(erro);
     }
@@ -72,7 +81,7 @@ export const Register = () => {
         <a href="/"><img src="./src/assets/arrow.png" /></a>
         <label htmlFor="file-input" className={style.profile_label}>
           <div className={style.profile_picture}>
-            {image ? <img src={image} alt="Profile" /> : <span>+</span>}
+            {imageBase64 ? <img src={imageBase64} alt="Profile" /> : <span>+</span>}
           </div>
         </label>
         <input
