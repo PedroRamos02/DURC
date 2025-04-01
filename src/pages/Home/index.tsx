@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import style from "./Home.module.css";
 import { FaEye, FaEyeSlash } from "react-icons/fa"; 
+import { Submitbutton } from "../../components/SubmitButton";
 
 const Home = () => {
   const [formData, setFormData] = useState({
@@ -113,7 +114,7 @@ const Home = () => {
           </span>
         </div>
       </div>
-      <button className={style.edit_button}>Salvar</button>
+      <Submitbutton text={'Salvar'} />
     </div>
   );
 };

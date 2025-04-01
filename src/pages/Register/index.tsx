@@ -1,6 +1,7 @@
 import { useState } from "react";
 import style from "./Register.module.css";
 import { useNavigate } from "react-router-dom";
+import { Submitbutton } from "../../components/SubmitButton";
 
 export const Register = () => {
   const [formData, setFormData] = useState({
@@ -123,7 +124,7 @@ export const Register = () => {
           value={formData.confirmPassword}
           onChange={handleChange}
         />
-        <button type="submit" className={style.register_button}>Criar conta</button>
+      <Submitbutton text={'Criar conta'} />
       </form>
     </div>
   );

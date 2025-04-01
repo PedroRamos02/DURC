@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import style from './Login.module.css'
 import { useState } from 'react';
+import { Submitbutton } from '../../components/SubmitButton';
 
 export const Login = () => {
   const [formData, setFormData] = useState({
@@ -70,7 +71,7 @@ export const Login = () => {
         </input>
         <input 
           className={style.login_input} 
-          placeholder='Password'
+          placeholder='Senha'
           type='password'
           name='password'
           data-icon="password"
@@ -78,7 +79,7 @@ export const Login = () => {
           onChange={handleChange}
           >
         </input>
-        <button type="submit" className={style.login_button}>Login</button>
+        <Submitbutton text={'Login'}/>
         <p>Não possui conta? <a href='/register'>Cadastre-se!</a></p>
       </form>
     </div>

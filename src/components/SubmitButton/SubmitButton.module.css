@@ -1,0 +1,18 @@
+.submit_button {
+    color: #2148C0;
+    background-color: #FFFFFF;
+    border-radius: 4px;
+    width: 345px;
+    height: 45px;
+    border: none;
+    box-shadow: 4px 10px 14px rgba(0, 0, 0, 0.2); 
+    transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;    
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.submit_button:hover {
+    box-shadow: 2px 6px 10px rgba(0, 0, 0, 0.1); 
+    transform: scale(1.02); 
+  }
